@@ -10,7 +10,7 @@ let totalNumeroSorteado = [];
 let restante = TOTAL_NUMERO_SORTEADO - totalNumeroSorteado;
 let resultadoJogo = (totalNumeroSorteado === TOTAL_NUMERO_SORTEADO);
 
-// 4. consigurações de entrada
+// 4. configurações de entrada
 const readline = require("readline") 
 
 rl = readline.createInterface({
