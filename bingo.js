@@ -13,7 +13,7 @@ let resultadoJogo = (totalNumeroSorteado === TOTAL_NUMERO_SORTEADO);
 // 4. configurações de entrada
 const readline = require("readline") 
 
-rl = readline.createInterface({
+const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
@@ -22,10 +22,15 @@ rl.question("Escolha uma opção: ", function (opcao){
 
     console.log("Nome do Evento: ", nomeDoEvento);
     console.log("Opção escolhida: ", opcao);
+
+    if(numerosDisponiveis.length === 0){
+        console.log("\nTodos os numeros já foram sorteados. O jogo terminou!");
+        return;
+    }
     rl.close();
 
 
-})
+});
 
 
  
