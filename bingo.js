@@ -1,10 +1,10 @@
 //  configurações iniciais do jogo
-const TOTAL_NUMERO_SORTEADO = 75;
+const TOTAL_NUMEROS_BINGO = 75;
 let nomeDoEvento = "Bingo da Alegria";
 
 //  variáveis para o estado do jogo
 let numerosDisponiveis = [];
-let totalNumeroSorteado = [];
+let jaSorteados = [];
 
 // funções 
 
@@ -20,25 +20,46 @@ function exibirMenu(){
 function inicializarNumerosDisponiveis(){
     let numeros = [];
 
-    for (let numero = 1; numero <=TOTAL_NUMERO_SORTEADO; numero++){
+    for (let numero = 1; numero <=TOTAL_NUMEROS_BINGO; numero++){
         numeros.push(numero);
     }
 
     return numeros;
 }
 
+
 function calcularRestante(){
-    return TOTAL_NUMERO_SORTEADO - totalNumeroSorteado.length;
-}
+    return TOTAL_NUMEROS_BINGO - jaSorteados.length;
+} // Essa função calcula quantos números ainda faltam ser sorteados.
 
 function verificarResultadoJogo(){
-    return totalNumeroSorteado.length === TOTAL_NUMERO_SORTEADO;
+    return jaSorteados.length === TOTAL_NUMEROS_BINGO;
+}
+
+// função sortear numero 
+function sortearNumero(){
+
+    if(numerosDisponiveis.length === 0 ){
+        return null;
+    }
+
+    let indiceAleatorio = Math.floor(Math.random() * numerosDisponiveis.length);
+
+    let numeroSorteado = numerosDisponiveis[indiceAleatorio];
+
+    numerosDisponiveis.splice(indiceAleatorio, 1);
+
+    jaSorteados.push(numeroSorteado);
+
+    return numeroSorteado;
+
 }
 
 // inicializaçao do jogo
 numerosDisponiveis = inicializarNumerosDisponiveis();
-
 exibirMenu();
+
+// Dados de entrada 
 
 const readline = require("readline") 
 
@@ -54,10 +75,9 @@ rl.question("Escolha uma opção: ", function (opcao){
 
     if(numerosDisponiveis.length === 0){
         console.log("\nTodos os numeros já foram sorteados. O jogo terminou!");
+        rl.close();
         return;
     }
-    rl.close();
-
 
 });
 
