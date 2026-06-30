@@ -7,8 +7,6 @@ let numerosDisponiveis = [];
 let jaSorteados = [];
 
 // funções 
-
-
 function exibirMenu(){
     console.log("Bem-vindo ao Bingo da Alegria!");
     console.log("1. Sortear um número");
@@ -57,31 +55,55 @@ function sortearNumero(){
 
 // inicializaçao do jogo
 numerosDisponiveis = inicializarNumerosDisponiveis();
-exibirMenu();
+//exibirMenu();
 
-// Dados de entrada 
-
-const readline = require("readline") 
+// Dados de entrada
+const readline = require("readline");
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
-})
-
-rl.question("Escolha uma opção: ", function (opcao){
-
-    console.log("Nome do Evento: ", nomeDoEvento);
-    console.log("Opção escolhida: ", opcao);
-
-    if(numerosDisponiveis.length === 0){
-        console.log("\nTodos os numeros já foram sorteados. O jogo terminou!");
-        rl.close();
-        return;
-    }
-
 });
 
+// perguntamos dentro da função - função para manter o menu repetindo 
+function iniciarMenu(){
 
- 
-//console.log("Faltam: ", restante);
-//console.log("Jogo Terminou: ", resultadoJogo);
+    console.log("\nNome do Evento:", nomeDoEvento);
+    exibirMenu();
+
+    rl.question("Escolha uma opção: ", function(opcao) {
+
+        console.log("\nOpção escolhida:", opcao);
+
+        if (opcao === "1") {
+
+            let numeroSorteado = sortearNumero();
+
+            if (numeroSorteado === null) {
+                console.log("\nTodos os números já foram sorteados. O jogo terminou.");
+                rl.close();
+                return;
+            } else {
+                console.log("\nNúmero sorteado:", numeroSorteado);
+                console.log("Números restantes:", calcularRestante());
+            }
+
+            iniciarMenu();
+
+        } else if (opcao === "0") {
+
+            console.log("\nSaindo do jogo. Obrigado por jogar!");
+            rl.close();
+
+        } else {
+
+            console.log("\nOpção inválida. Escolha uma opção do menu.");
+            iniciarMenu();
+
+        }
+
+    });
+}
+// chamando a função
+iniciarMenu();
+       
