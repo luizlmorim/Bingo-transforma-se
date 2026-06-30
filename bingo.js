@@ -3,7 +3,7 @@ const TOTAL_NUMEROS_BINGO = 75;
 let nomeDoEvento = "Bingo da Alegria";
 
 //  variáveis para o estado do jogo
-let numerosDisponiveis = [];
+let numerosDisponiveis = []
 let jaSorteados = [];
 
 // funções 
@@ -30,9 +30,9 @@ function calcularRestante(){
     return TOTAL_NUMEROS_BINGO - jaSorteados.length;
 } // Essa função calcula quantos números ainda faltam ser sorteados.
 
-function verificarResultadoJogo(){
-    return jaSorteados.length === TOTAL_NUMEROS_BINGO;
-}
+//function verificarResultadoJogo(){
+    //return jaSorteados.length === TOTAL_NUMEROS_BINGO;
+//}
 
 // função sortear numero 
 function sortearNumero(){
@@ -85,12 +85,27 @@ function iniciarMenu(){
                 return;
             } else {
                 console.log("\nNúmero sorteado:", numeroSorteado);
-                console.log("Números restantes:", calcularRestante());
             }
 
             iniciarMenu();
 
-        } else if (opcao === "0") {
+        } else if (opcao === "2"){
+
+            if(jaSorteados.length === 0){
+                console.log("\nNenhum número foi sorteado ainda.");
+            } else {
+                console.log("\nNúmeros já sorteados: ", jaSorteados)
+            }
+
+            iniciarMenu();
+
+        } else if(opcao === "3"){
+
+            console.log("\nNúmeros restantes: ", calcularRestante());
+
+            iniciarMenu();
+
+        }else if (opcao === "0") {
 
             console.log("\nSaindo do jogo. Obrigado por jogar!");
             rl.close();
@@ -104,6 +119,7 @@ function iniciarMenu(){
 
     });
 }
+
 // chamando a função
 iniciarMenu();
        
