@@ -3,13 +3,20 @@ const TOTAL_NUMEROS_BINGO = 75;
 let nomeDoEvento = "Bingo da Alegria";
 
 //  variáveis para o estado do jogo
-let numerosDisponiveis = []
+let numerosDisponiveis = [];
 let jaSorteados = [];
 
 // funções 
+
+// criar função de mensagem de abertura única para o jogo 
+
+
+
 function exibirMenu(){
-    console.log("Bem-vindo ao Bingo da Alegria!");
-    console.log("1. Sortear um número");
+    //console.log("\nBem-vindo ao Bingo da Alegria!");
+
+    console.log('Escolha uma opção do menu:');
+    console.log("\n1. Sortear um número");
     console.log("2. Verificar números sorteados");
     console.log("3. Verificar números restantes");
     console.log("0. Sair do jogo");
@@ -20,7 +27,7 @@ function inicializarNumerosDisponiveis(){
 
     for (let numero = 1; numero <=TOTAL_NUMEROS_BINGO; numero++){
         numeros.push(numero);
-    }
+    } // 1 - 75 
 
     return numeros;
 }
@@ -34,19 +41,20 @@ function calcularRestante(){
     //return jaSorteados.length === TOTAL_NUMEROS_BINGO;
 //}
 
+
 // função sortear numero 
 function sortearNumero(){
 
     if(numerosDisponiveis.length === 0 ){
         return null;
     }
+   
+    let indiceAleatorio = Math.floor(Math.random() * numerosDisponiveis.length); // Gera um índice aleatório dentro do intervalo do array numerosDisponiveis 1
 
-    let indiceAleatorio = Math.floor(Math.random() * numerosDisponiveis.length);
-
-    let numeroSorteado = numerosDisponiveis[indiceAleatorio];
+    let numeroSorteado = numerosDisponiveis[indiceAleatorio]; // Obtém o número correspondente ao índice aleatório
 
     numerosDisponiveis.splice(indiceAleatorio, 1);
-
+    
     jaSorteados.push(numeroSorteado);
 
     return numeroSorteado;
@@ -55,7 +63,6 @@ function sortearNumero(){
 
 // inicializaçao do jogo
 numerosDisponiveis = inicializarNumerosDisponiveis();
-//exibirMenu();
 
 // Dados de entrada
 const readline = require("readline");
@@ -65,10 +72,10 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+
 // perguntamos dentro da função - função para manter o menu repetindo 
 function iniciarMenu(){
 
-    console.log("\nNome do Evento:", nomeDoEvento);
     exibirMenu();
 
     rl.question("Escolha uma opção: ", function(opcao) {
@@ -121,5 +128,14 @@ function iniciarMenu(){
 }
 
 // chamando a função
-iniciarMenu();
+// iniciarMenu();
+
+function mensagemAbertura(){
+    rl.question("Olá! Qual é o seu nome? ", function(nome) {
+        console.log("\nBem-vindo(a), " + nome + ", ao " + nomeDoEvento + "!");
+        iniciarMenu();
+    });
+}
+
+mensagemAbertura();
        
